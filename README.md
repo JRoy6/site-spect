@@ -20,7 +20,8 @@
     - in a new shell, run "make kubedash"
 * run "make uninstall" to destroy cluster.
 
-
+## To-Do 
+    - Use helm dependicies
 
 ## Day 1 (~4hrs)
 ### S1. Start with creating a repo for site-spect.
@@ -114,7 +115,3 @@
 ### S26. Create Makefile to make things easier.
     - Commands to forward the ports and keep it running in the background.
     - Ugly way of killing port-forward commands.
-
-## To-Do 
-    - Use helm dependicies
-    - Create/export index patterns for kibana.
