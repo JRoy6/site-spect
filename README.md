@@ -14,9 +14,9 @@
     - Stack will be deployed and ports will be forwarded.
 * go to [grafana dashboard for k8s cluster](http://127.0.0.1:3000/d/efa86fd1d0c121a26444b636a3f509a8/kubernetes-compute-resources-cluster?orgId=1&refresh=10s)
     - [grafana dashboard for individual pods](http://127.0.0.1:3000/d/85a562078cdf77779eaa1add43ccec1e/kubernetes-compute-resources-namespace-pods?orgId=1&refresh=10s)
+    - login: admin/prom-operator
     - this assumes you are running docker for mac. Change ip if necessary
 * go to [kibana dashboard](http://127.0.0.1:5601/)
-    - login: admin/prom-operator
 * go to k8s dashboard
     - in a new shell, run "make kubedash"
 * run "make uninstall" to destroy cluster.
