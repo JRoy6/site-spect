@@ -42,4 +42,4 @@ nokube: ## stop minikube
 
 .PHONY: minikube dashboard
 kubedash: ##minikube dashboard
-	minikube dashboard > /dev/null 2>&1 &
+	minikube dashboard 
