@@ -1,0 +1,56 @@
+elasticsearch:
+  # Permit co-located instances for solitary minikube virtual machines.
+  antiAffinity: "soft"
+
+  # Shrink default JVM heap.
+  esJavaOpts: "-Xmx128m -Xms128m"
+
+  # Allocate smaller chunks of memory per pod.
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "512M"
+    limits:
+      cpu: "1000m"
+      memory: "512M"
+
+  # Request smaller persistent volumes.
+  volumeClaimTemplate:
+    accessModes: [ "ReadWriteOnce" ]
+    storageClassName: "standard"
+    resources:
+      requests:
+        storage: 100M
+
+logstash:
+  persistence:
+    enabled: true
+
+  logstashConfig:
+    logstash.yml: |
+      http.host: 0.0.0.0
+      xpack.monitoring.enabled: false
+
+  logstashPipeline:
+    uptime.conf: |
+      input { exec { command => "uptime" interval => 30 } }
+      output { elasticsearch { hosts => ["http://elasticsearch-master:9200"] index => "logstash" } }
+
+filebeat:
+  deployment:
+    enabled: true
+
+  daemonset:
+    enabled: false
+
+  filebeatConfig:
+    filebeat.yml: |
+      filebeat.inputs:
+        - type: log 
+          paths:
+          - /usr/share/filebeat/logs/filebeat
+
+      output.elasticsearch:
+        host: '${NODE_NAME}'
+        hosts: 'elasticsearch-master.default.svc.cluster.local:9200'
+
